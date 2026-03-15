@@ -81,6 +81,7 @@ s_rocket:{t:"Rocket Launch Simulator",d:"Configure engine, thrust, fuel, payload
   kerosene:"Kerosene/LOX",hydrogen:"Hydrogen/LOX",methane:"Methane/LOX",
   eng_hint:"ISP",stg_hint:"drop dead weight",thr_hint:"↑TWR",fuel_hint:"↑Δv ↑mass",pay_hint:"↑mass ↓Δv",ang_hint:"pitch angle",
   auto_adj:"Auto-adjusted",
+  crew:"Crew & Cargo",astronaut:"Astronaut",dog:"Dog",cat:"Cat",satellite:"Satellite",comms:"Comms",science_eq:"Science Eq.",food_supplies:"Food & Supplies",life_support:"Life Support",total_payload:"Total Payload",
   exp_t:"Rocket Science",exp:"Rockets work by Newton's 3rd Law: exhaust gases push down, the rocket pushes up. The <strong>thrust-to-weight ratio</strong> must exceed 1 to lift off. More fuel = more burn time but more weight. More payload = harder to reach orbit. Launch angle matters: too steep wastes fuel fighting gravity, too shallow can't gain altitude. Real rockets use multiple stages, dropping empty tanks to reduce mass. Choose your engine wisely: hydrogen gives more efficiency (ISP) but needs bigger tanks."},
 s_moon:{t:"Moon Phases",d:"See why the Moon changes shape. Drag the Moon around Earth and watch phases change from new to full and back.",tag:"Interactive Model",
   phase:"Current Phase",new:"New Moon",waxc:"Waxing Crescent",firstq:"First Quarter",waxg:"Waxing Gibbous",full:"Full Moon",wang:"Waning Gibbous",lastq:"Last Quarter",wanc:"Waning Crescent",
@@ -426,6 +427,7 @@ my:{
     methane:'မီသိန်း/LOX',
     eng_hint:'ISP',stg_hint:'အလေးချိန် ချပါ',thr_hint:'↑TWR',fuel_hint:'↑Δv ↑ဒြပ်ထု',pay_hint:'↑ဒြပ်ထု ↓Δv',ang_hint:'လွှတ်ထောင့်',
     auto_adj:'အလိုအလျောက် ချိန်ညှိပြီး',
+    crew:'အမှုထမ်းနှင့် ကုန်ပစ္စည်း',astronaut:'အာကာသယာဉ်မှူး',dog:'ခွေး',cat:'ကြောင်',satellite:'ဂြိုလ်တု',comms:'ဆက်သွယ်ရေး',science_eq:'သိပ္ပံပစ္စည်း',food_supplies:'အစားအစာနှင့် ပစ္စည်းများ',life_support:'အသက်ရှင်ရေးစနစ်',total_payload:'စုစုပေါင်း ကုန်ရွေး',
     exp_t:'ဒုံးပျံ သိပ္ပံ',
     exp:'ဒုံးပျံများသည် နယူတန်တတိယဥပဒေ (ကြိုးဆွဲ = တန်ပြန်ကြိုးဆွဲ) ဖြင့် မြင့်တက်သည်။ <strong>Thrust-to-Weight Ratio (TWR)</strong> သည် ၁.၀ ကျော်မှသာ ဂြိုလ်ဆွဲအားကို ကျော်လွှားနိုင်သည်။ ဓာတ်ဆီ ပိုသွင်းလျှင် ဒြပ်ထု ကြီးသောကြောင့် TWR ကျသည် — ဤသည်ပင် ပိုသွင်းများ-ပိုသွင်းမကောင်းဟူသောပြဿနာဖြစ်သည်။ လ (Moon) ရောက်ရန် ကမ္ဘာ orbit မှ Trans-Lunar Injection (TLI) burn ထပ်မံ လုပ်ဆောင်ပြီး ~384,400 km ခရီး သွားနိုင်ရမည်။'
   },

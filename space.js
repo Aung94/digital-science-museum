@@ -88,6 +88,66 @@ reg('space-rocket',{
 
     // ── Parameters ──────────────────────────────────────────────────
     let engIdx=0, thrust_kN=1500, fuel_kg=50000, payload_kg=1000, angle_deg=80, stages=2;
+    // Crew/cargo picker state
+    const CREW_ITEMS=[
+      {key:'astronaut',emoji:'👨‍🚀',kg:80,max:6,foodPer:50},
+      {key:'dog',emoji:'🐕',kg:30,max:3,foodPer:10},
+      {key:'cat',emoji:'🐈',kg:5,max:3,foodPer:10},
+      {key:'satellite',emoji:'🛰️',kg:500,max:3,foodPer:0},
+      {key:'comms',emoji:'📡',kg:200,max:3,foodPer:0},
+      {key:'science_eq',emoji:'🔬',kg:300,max:5,foodPer:0}
+    ];
+    const crewCounts={astronaut:0,dog:0,cat:0,satellite:1,comms:0,science_eq:0};
+    const LIFE_SUPPORT_KG=200;
+
+    function calcPayloadFromCrew(){
+      let itemWeight=0,foodWeight=0,hasLiving=false;
+      CREW_ITEMS.forEach(ci=>{
+        const n=crewCounts[ci.key];
+        itemWeight+=n*ci.kg;
+        if(ci.foodPer>0&&n>0){foodWeight+=n*ci.foodPer;hasLiving=true;}
+      });
+      const lifeSupport=hasLiving?LIFE_SUPPORT_KG:0;
+      return {itemWeight,foodWeight,lifeSupport,total:itemWeight+foodWeight+lifeSupport};
+    }
+
+    function recalcPayload(){
+      const bp=calcPayloadFromCrew();
+      payload_kg=Math.max(0,bp.total);
+      // Auto-reduce fuel if over capacity
+      const cap=maxCapacity();
+      if(fuel_kg+payload_kg>cap){
+        fuel_kg=Math.max(5000,cap-payload_kg);
+        setSlider('rF','rFV',fuel_kg,v=>v.toLocaleString()+' kg');
+        autoAdjMsg=t('s_rocket.auto_adj')+': '+t('s_rocket.fuel')+' ↓ '+fuel_kg.toLocaleString()+' kg';
+      }
+      autoAdjustThrust();
+      refreshPayloadDisplay();
+      refreshStatic();
+    }
+
+    function refreshPayloadDisplay(){
+      const bp=calcPayloadFromCrew();
+      // Update counts in picker
+      CREW_ITEMS.forEach(ci=>{
+        const el=document.getElementById('cc_'+ci.key);
+        if(el) el.textContent=crewCounts[ci.key];
+      });
+      // Update breakdown
+      const bd=document.getElementById('rPayBreak');
+      if(bd){
+        let html='';
+        CREW_ITEMS.forEach(ci=>{
+          const n=crewCounts[ci.key];
+          if(n>0) html+=`<span>${ci.emoji}×${n}=${(n*ci.kg).toLocaleString()}kg</span> `;
+        });
+        if(bp.foodWeight>0) html+=`<span>🍱${bp.foodWeight.toLocaleString()}kg</span> `;
+        if(bp.lifeSupport>0) html+=`<span>♻️${bp.lifeSupport.toLocaleString()}kg</span> `;
+        html+=`<span style="color:#a78bfa;font-weight:700">= ${bp.total.toLocaleString()} kg</span>`;
+        bd.innerHTML=html;
+      }
+    }
+
     // Capacity: max cargo (fuel+payload) per stage — represents tankage volume
     const CAPACITY_PER_STAGE=80000; // kg per stage
     const maxCapacity=()=>CAPACITY_PER_STAGE*stages;
@@ -157,43 +217,25 @@ reg('space-rocket',{
       autoAdjMsg='';
     }
 
-    // When fuel changes → auto-reduce payload if over capacity
+    // When fuel changes → payload is fixed from crew picker, just enforce capacity
     function onFuelChange(newFuel){
       const cap=maxCapacity();
-      fuel_kg=Math.min(newFuel,cap-100); // always leave room for min payload
+      fuel_kg=Math.min(newFuel,cap-payload_kg); // leave room for crew payload
+      if(fuel_kg<5000) fuel_kg=5000;
       if(fuel_kg!==newFuel) setSlider('rF','rFV',fuel_kg,v=>v.toLocaleString()+' kg');
-      if(fuel_kg+payload_kg>cap){
-        payload_kg=Math.max(100,cap-fuel_kg);
-        setSlider('rP','rPV',payload_kg,v=>v.toLocaleString()+' kg');
-        autoAdjMsg=t('s_rocket.auto_adj')+': '+t('s_rocket.payload')+' ↓ '+payload_kg.toLocaleString()+' kg';
-      } else { autoAdjMsg=''; }
+      autoAdjMsg='';
       autoAdjustThrust();
     }
 
-    // When payload changes → auto-reduce fuel if over capacity
-    function onPayloadChange(newPay){
-      const cap=maxCapacity();
-      payload_kg=Math.min(newPay,cap-5000); // always leave room for min fuel
-      if(payload_kg!==newPay) setSlider('rP','rPV',payload_kg,v=>v.toLocaleString()+' kg');
-      if(fuel_kg+payload_kg>cap){
-        fuel_kg=Math.max(5000,cap-payload_kg);
-        setSlider('rF','rFV',fuel_kg,v=>v.toLocaleString()+' kg');
-        autoAdjMsg=t('s_rocket.auto_adj')+': '+t('s_rocket.fuel')+' ↓ '+fuel_kg.toLocaleString()+' kg';
-      } else { autoAdjMsg=''; }
-      autoAdjustThrust();
-    }
+    // Payload is now driven by crew/cargo picker — recalcPayload() handles it
 
-    // When stages change → capacity changes, rebalance
+    // When stages change → capacity changes, rebalance (reduce fuel only, payload is crew-driven)
     function onStagesChange(newStg){
       stages=newStg;
       const cap=maxCapacity();
       if(fuel_kg+payload_kg>cap){
-        // Proportionally reduce both
-        const ratio=cap/(fuel_kg+payload_kg);
-        fuel_kg=Math.max(5000,Math.round(fuel_kg*ratio/5000)*5000);
-        payload_kg=Math.max(100,Math.min(cap-fuel_kg,Math.round(payload_kg*ratio/100)*100));
+        fuel_kg=Math.max(5000,cap-payload_kg);
         setSlider('rF','rFV',fuel_kg,v=>v.toLocaleString()+' kg');
-        setSlider('rP','rPV',payload_kg,v=>v.toLocaleString()+' kg');
         autoAdjMsg=t('s_rocket.auto_adj')+': capacity '+cap.toLocaleString()+' kg';
       }
       autoAdjustThrust();
@@ -222,8 +264,20 @@ reg('space-rocket',{
           <div class="ctrl" style="flex:1;min-width:130px"><label>${t('s_rocket.fuel')} (kg) <span style="color:var(--dim);font-size:0.6em">${t('s_rocket.fuel_hint')}</span></label><input type="range" id="rF" min="5000" max="200000" value="${fuel_kg}" step="5000"></div><span class="val" id="rFV">${fuel_kg.toLocaleString()} kg</span>
         </div>
         <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:0.5rem">
-          <div class="ctrl" style="flex:1;min-width:130px"><label>${t('s_rocket.payload')} (kg) <span style="color:var(--dim);font-size:0.6em">${t('s_rocket.pay_hint')}</span></label><input type="range" id="rP" min="100" max="10000" value="${payload_kg}" step="100"></div><span class="val" id="rPV">${payload_kg.toLocaleString()} kg</span>
           <div class="ctrl" style="flex:1;min-width:130px"><label>${t('s_rocket.stages')} <span style="color:var(--dim);font-size:0.6em">${t('s_rocket.stg_hint')}</span></label><input type="range" id="rSt" min="1" max="3" value="${stages}" step="1"></div><span class="val" id="rStV">${stages} stage${stages>1?'s':''}</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:0.5rem;margin-bottom:0.5rem">
+          <div style="font-family:var(--mono);font-size:0.65rem;color:var(--dim);margin-bottom:0.35rem;text-transform:uppercase;letter-spacing:0.06em">${t('s_rocket.crew')} <span style="color:var(--dim);font-size:0.8em">${t('s_rocket.pay_hint')}</span></div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.3rem 0.6rem">
+            ${CREW_ITEMS.map(ci=>`<div style="display:flex;align-items:center;gap:0.3rem;font-family:var(--mono);font-size:0.7rem">
+              <span style="width:1.4em;text-align:center">${ci.emoji}</span>
+              <span style="flex:1;color:rgba(255,255,255,0.7);font-size:0.6rem;white-space:nowrap">${t('s_rocket.'+ci.key)}<span style="color:var(--dim)"> ${ci.kg}kg</span></span>
+              <button class="btn" style="padding:0 0.35rem;font-size:0.75rem;line-height:1.4;min-width:1.5em" onclick="rCrewAdj('${ci.key}',-1)">−</button>
+              <span id="cc_${ci.key}" style="min-width:1.2em;text-align:center;color:#a78bfa;font-weight:700">${crewCounts[ci.key]}</span>
+              <button class="btn" style="padding:0 0.35rem;font-size:0.75rem;line-height:1.4;min-width:1.5em" onclick="rCrewAdj('${ci.key}',1)">+</button>
+            </div>`).join('')}
+          </div>
+          <div id="rPayBreak" style="font-family:var(--mono);font-size:0.6rem;color:rgba(255,255,255,0.55);margin-top:0.35rem;display:flex;flex-wrap:wrap;gap:0.3rem 0.6rem"></div>
         </div>
         <div style="display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:0.5rem">
           <div class="ctrl" style="flex:1;min-width:130px"><label>${t('s_rocket.angle')} (°) <span style="color:var(--dim);font-size:0.6em">${t('s_rocket.ang_hint')}</span></label><input type="range" id="rA" min="50" max="90" value="${angle_deg}" step="1"></div><span class="val" id="rAV">${angle_deg}°</span>
@@ -295,10 +349,16 @@ reg('space-rocket',{
     }
     bindSlider('rT','rTV',v=>v.toLocaleString()+' kN',v=>{thrust_kN=v;autoAdjMsg=''});
     bindSlider('rF','rFV',v=>v.toLocaleString()+' kg',v=>{onFuelChange(v)});
-    bindSlider('rP','rPV',v=>v.toLocaleString()+' kg',v=>{onPayloadChange(v)});
     bindSlider('rSt','rStV',v=>v+' stage'+(v>1?'s':''),v=>{onStagesChange(v)});
     bindSlider('rA','rAV',v=>v+'°',v=>{angle_deg=v});
-    refreshStatic();
+    // Crew picker adjustment handler
+    window.rCrewAdj=(key,delta)=>{
+      const ci=CREW_ITEMS.find(c=>c.key===key);if(!ci)return;
+      crewCounts[key]=Math.max(0,Math.min(ci.max,crewCounts[key]+delta));
+      recalcPayload();
+    };
+    // Initial payload calculation from default crew
+    recalcPayload();
 
     // ── Engine selector ─────────────────────────────────────────────
     window.rSetEng=idx=>{
@@ -324,6 +384,10 @@ reg('space-rocket',{
       launched=false;done=false;rStatus='';msReached=[false,false,false];maxAltReached=0;
       alt=0;downrange=0;vx=0;vy=0;fuel_left=0;stagesLeft=0;trail=[];
       moonLandAnim=0;moonApproach=false;approachStart=0;approachAlt=0;
+      // Reset crew counts to defaults
+      Object.keys(crewCounts).forEach(k=>crewCounts[k]=0);
+      crewCounts.satellite=1;
+      recalcPayload();
       ['rAlt','rVel','rFuel2'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent='—'});
       const mb=document.getElementById('rMsBox');if(mb)mb.textContent='';
       refreshStatic();
@@ -719,7 +783,7 @@ reg('space-rocket',{
       aid=requestAnimationFrame(draw);
     }
     refreshStatic();draw();
-    return()=>{cancelAnimationFrame(aid);delete window.rLaunch;delete window.rReset;delete window.rSetEng};
+    return()=>{cancelAnimationFrame(aid);delete window.rLaunch;delete window.rReset;delete window.rSetEng;delete window.rCrewAdj};
   }
 });
 
