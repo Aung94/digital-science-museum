@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Science Museum — Interactive Physics, Math, Chemistry & Space Exhibits</title>
+<meta name="description" content="Explore 20+ interactive science exhibits covering Physics, Math, Chemistry, and Space. Build atoms, launch rockets, explore fractals, balance equations, and more. Free, bilingual (English/Burmese), and kid-friendly.">
+<meta name="keywords" content="science museum, interactive, physics, math, chemistry, space, education, STEM, GCE O-Level, SAT, exhibits, simulation, Burmese, Myanmar">
+<meta name="author" content="Digital Science Museum">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://digital-science-museum.web.app/">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://digital-science-museum.web.app/">
+<meta property="og:title" content="Digital Science Museum — Interactive Science Exhibits">
+<meta property="og:description" content="20+ free interactive exhibits: build atoms, launch rockets, zoom into fractals, balance equations. Explore science like never before!">
+<meta property="og:image" content="https://digital-science-museum.web.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Digital Science Museum">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="my_MM">
+<meta property="fb:app_id" content="">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Digital Science Museum — Interactive Science Exhibits">
+<meta name="twitter:description" content="20+ free interactive exhibits: build atoms, launch rockets, zoom into fractals. Explore science like never before!">
+<meta name="twitter:image" content="https://digital-science-museum.web.app/og-image.png">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔬</text></svg>">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Digital Science Museum",
+  "description": "Interactive digital science museum with 20+ exhibits covering Physics, Math, Chemistry, and Space",
+  "url": "https://digital-science-museum.web.app/",
+  "inLanguage": ["en", "my"],
+  "about": {
+    "@type": "Thing",
+    "name": "Science Education"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "student"
+  }
+}
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Padauk:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<!-- Google AdSense Auto Ads — replace YOUR_PUB_ID with your ca-pub-XXXXXXXXXXXXXXXX -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUB_ID" crossorigin="anonymous"></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-YOUR_PUB_ID",enable_page_level_ads:true});</script>
+</head>
+<body>
+<nav id="mainNav">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="navigate('home')">
+      <div class="logo-orb"></div>
+      <span data-t="nav.title">Digital Science Museum</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a data-section="physics" onclick="navigate('physics')"><span class="nav-dot" style="--c:var(--physics)"></span><span data-t="nav.physics">Physics</span></a>
+      <a data-section="math" onclick="navigate('math')"><span class="nav-dot" style="--c:var(--math)"></span><span data-t="nav.math">Mathematics</span></a>
+      <a data-section="chemistry" onclick="navigate('chemistry')"><span class="nav-dot" style="--c:var(--chem)"></span><span data-t="nav.chemistry">Chemistry</span></a>
+      <a data-section="space" onclick="navigate('space')"><span class="nav-dot" style="--c:var(--space)"></span><span data-t="nav.space">Space</span></a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('my')">မြန်မာ</button>
+      </div>
+      <button class="nav-burger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<main id="app"></main>
+
+
+<!-- Footer -->
+<footer id="siteFooter" class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="footer-logo"><div class="logo-orb"></div> Digital Science Museum</div>
+      <p>Free interactive science education for everyone.</p>
+    </div>
+    <div class="footer-share" id="footerShare">
+      <span>Share:</span>
+      <button class="share-btn" onclick="shareOnFacebook()" title="Share on Facebook">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </button>
+      <button class="share-btn" onclick="shareOnTwitter()" title="Share on X/Twitter">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </button>
+      <button class="share-btn" onclick="copyLink()" title="Copy Link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      </button>
+    </div>
+  </div>
+</footer>
+
+<script src="lang.js"></script>
+<script src="core.js"></script>
+<script src="physics.js"></script>
+<script src="math.js?v=5"></script>
+<script src="chemistry.js"></script>
+<script src="space.js?v=10"></script>
+<script src="piday.js"></script>
+<script src="riemann.js"></script>
+<script src="ai.js"></script>
+<script src="city-energy.js"></script>
+<script src="detail.js"></script>
+
+<!-- Sharing functions -->
+<script>
+function shareOnFacebook(){
+  const url=encodeURIComponent(window.location.href);
+  const title=encodeURIComponent('Digital Science Museum — Interactive Science Exhibits');
+  window.open('https://www.facebook.com/sharer/sharer.php?u='+url+'&quote='+title,'_blank','width=600,height=400');
+}
+function shareOnTwitter(){
+  const url=encodeURIComponent(window.location.href);
+  const text=encodeURIComponent('Check out this amazing interactive Digital Science Museum! 🔬🚀🧪 Build atoms, launch rockets, explore fractals and more!');
+  window.open('https://twitter.com/intent/tweet?url='+url+'&text='+text,'_blank','width=600,height=400');
+}
+function copyLink(){
+  navigator.clipboard.writeText(window.location.href).then(()=>{
+    const btn=document.querySelector('.share-btn[onclick*="copyLink"]');
+    const orig=btn.innerHTML;btn.innerHTML='<span style="font-size:12px">Copied!</span>';
+    setTimeout(()=>btn.innerHTML=orig,2000);
+  });
+}
+</script>
+
+<script>document.addEventListener('DOMContentLoaded',()=>handleRoute());</script>
+</body>
+</html>
