@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://digital-science-museum.web.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#physics</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#math</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#chemistry</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#space</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#physics/atoms</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#physics/forces</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#physics/circuits</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#physics/light</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#physics/energy</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#math/primes</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#math/fractals</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#math/pythag</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#math/prob</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#math/trig</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#chemistry/ptable</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#chemistry/states</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#chemistry/bonds</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#chemistry/ph</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#chemistry/react</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#space/solar</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#space/rocket</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#space/moon</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#space/star</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#space/tele</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#math/piday</loc><changefreq>yearly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#math/riemann</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#math/ai</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://digital-science-museum.web.app/#physics/city-energy</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+</urlset>

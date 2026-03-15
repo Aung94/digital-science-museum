@@ -7,8 +7,14 @@
 <meta name="description" content="Explore 20+ interactive science exhibits covering Physics, Math, Chemistry, and Space. Build atoms, launch rockets, explore fractals, balance equations, and more. Free, bilingual (English/Burmese), and kid-friendly.">
 <meta name="keywords" content="science museum, interactive, physics, math, chemistry, space, education, STEM, GCE O-Level, SAT, exhibits, simulation, Burmese, Myanmar">
 <meta name="author" content="Digital Science Museum">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="google-adsense-account" content="ca-pub-2850355877461307">
+<meta name="theme-color" content="#08080f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="canonical" href="https://digital-science-museum.web.app/">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
@@ -32,12 +38,13 @@
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔬</text></svg>">
 
-<!-- Structured Data -->
+<!-- Structured Data: WebSite -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Digital Science Museum",
+  "alternateName": "DSM",
   "description": "Interactive digital science museum with 20+ exhibits covering Physics, Math, Chemistry, and Space",
   "url": "https://digital-science-museum.web.app/",
   "inLanguage": ["en", "my"],
@@ -48,16 +55,63 @@
   "audience": {
     "@type": "EducationalAudience",
     "educationalRole": "student"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://digital-science-museum.web.app/#{search_term_string}",
+    "query-input": "required name=search_term_string"
   }
+}
+</script>
+<!-- Structured Data: Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Digital Science Museum",
+  "url": "https://digital-science-museum.web.app/",
+  "logo": "https://digital-science-museum.web.app/og-image.png",
+  "sameAs": []
+}
+</script>
+<!-- Structured Data: Educational Content -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Interactive Science Exhibits",
+  "description": "20+ interactive science exhibits for students and curious minds",
+  "numberOfItems": 20,
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Atom Builder","url":"https://digital-science-museum.web.app/#physics/atoms"},
+    {"@type":"ListItem","position":2,"name":"Force Playground","url":"https://digital-science-museum.web.app/#physics/forces"},
+    {"@type":"ListItem","position":3,"name":"Circuit Lab","url":"https://digital-science-museum.web.app/#physics/circuits"},
+    {"@type":"ListItem","position":4,"name":"Light & Color","url":"https://digital-science-museum.web.app/#physics/light"},
+    {"@type":"ListItem","position":5,"name":"Energy Explorer","url":"https://digital-science-museum.web.app/#physics/energy"},
+    {"@type":"ListItem","position":6,"name":"Prime Number Sieve","url":"https://digital-science-museum.web.app/#math/primes"},
+    {"@type":"ListItem","position":7,"name":"Fractal Explorer","url":"https://digital-science-museum.web.app/#math/fractals"},
+    {"@type":"ListItem","position":8,"name":"Pythagorean Theorem","url":"https://digital-science-museum.web.app/#math/pythag"},
+    {"@type":"ListItem","position":9,"name":"Probability Lab","url":"https://digital-science-museum.web.app/#math/prob"},
+    {"@type":"ListItem","position":10,"name":"Trig Waves","url":"https://digital-science-museum.web.app/#math/trig"},
+    {"@type":"ListItem","position":11,"name":"Periodic Table","url":"https://digital-science-museum.web.app/#chemistry/ptable"},
+    {"@type":"ListItem","position":12,"name":"States of Matter","url":"https://digital-science-museum.web.app/#chemistry/states"},
+    {"@type":"ListItem","position":13,"name":"Chemical Bonds","url":"https://digital-science-museum.web.app/#chemistry/bonds"},
+    {"@type":"ListItem","position":14,"name":"pH Scale","url":"https://digital-science-museum.web.app/#chemistry/ph"},
+    {"@type":"ListItem","position":15,"name":"Reaction Balancer","url":"https://digital-science-museum.web.app/#chemistry/react"},
+    {"@type":"ListItem","position":16,"name":"Solar System","url":"https://digital-science-museum.web.app/#space/solar"},
+    {"@type":"ListItem","position":17,"name":"Rocket Launch Simulator","url":"https://digital-science-museum.web.app/#space/rocket"},
+    {"@type":"ListItem","position":18,"name":"Moon Phases","url":"https://digital-science-museum.web.app/#space/moon"},
+    {"@type":"ListItem","position":19,"name":"Star Lifecycle","url":"https://digital-science-museum.web.app/#space/star"},
+    {"@type":"ListItem","position":20,"name":"Telescope Simulator","url":"https://digital-science-museum.web.app/#space/tele"}
+  ]
 }
 </script>
 
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Padauk:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 
-<!-- Google AdSense Auto Ads — replace YOUR_PUB_ID with your ca-pub-XXXXXXXXXXXXXXXX -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUB_ID" crossorigin="anonymous"></script>
-<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"ca-pub-YOUR_PUB_ID",enable_page_level_ads:true});</script>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2850355877461307" crossorigin="anonymous"></script>
 </head>
 <body>
 <nav id="mainNav">

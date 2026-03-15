@@ -157,8 +157,9 @@ function renderHome(app){
         </div>`).join('')}
     </div>
     <div class="ad-banner"><div class="ad-banner-inner">
-      <span class="ad-label"></span>
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2850355877461307" data-ad-slot="auto" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
     </div></div>`;
+  try{(adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){}
   initHeroBg();
 }
 
@@ -209,7 +210,11 @@ function renderSection(app,sec){
           <p>${t(c.dKey)}</p>
           <span class="tag">${t(c.tagKey)}</span>
         </div>`).join('')}
-    </div>`;
+    </div>
+    <div class="ad-banner"><div class="ad-banner-inner">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2850355877461307" data-ad-slot="auto" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+    </div></div>`;
+  try{(adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){}
 }
 
 // Exhibit renderer
@@ -224,7 +229,7 @@ function renderExhibit(app,sec,slug){
       <p class="ex-desc">${t(ex.dKey)}</p>
       <div class="ex-mount" id="exMount"></div>
       <div class="ad-banner" style="padding:0;margin:1.2rem 0"><div class="ad-banner-inner">
-        <span class="ad-label"></span>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2850355877461307" data-ad-slot="auto" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
       </div></div>
       <div class="ex-share" style="display:flex;gap:0.5rem;align-items:center;margin-bottom:1rem">
         <span style="font-family:var(--mono);font-size:0.7rem;color:var(--dim);text-transform:uppercase;letter-spacing:0.08em">Share this exhibit:</span>
@@ -241,4 +246,5 @@ function renderExhibit(app,sec,slug){
   const mount=document.getElementById('exMount');
   const cleanup=ex.render(mount);
   if(cleanup)currentCleanup=cleanup;
+  try{(adsbygoogle=window.adsbygoogle||[]).push({})}catch(e){}
 }

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://digital-science-museum.web.app/sitemap.xml
